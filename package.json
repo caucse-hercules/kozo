@@ -14,12 +14,7 @@
   ],
   "main": "./out/extension.js",
   "contributes": {
-    "commands": [
-      {
-        "command": "kozo.helloWorld",
-        "title": "Hello World"
-      }
-    ],
+    "commands": [],
     "viewsContainers": {
       "activitybar": [
         {
