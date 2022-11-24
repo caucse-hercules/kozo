@@ -10,7 +10,7 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:kozo.helloWorld"
+    "onView:kozo"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -18,6 +18,30 @@
       {
         "command": "kozo.helloWorld",
         "title": "Hello World"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "kozo",
+          "title": "Kozo",
+          "icon": "./resources/kozo-logo.svg"
+        }
+      ]
+    },
+    "views": {
+      "kozo": [
+        {
+          "id": "kozo",
+          "name": "Kozo"
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "kozo",
+        "contents": "Not a Kozo workspace. Create new one.\n[Create Kozo](command:kozo.helloWorld)\nIf Kozo already exists, load that.\n[Load Kozo](command:kozo.helloWorld)\n",
+        "when": "kozo.isViewWelcomeVisible == true"
       }
     ]
   },
