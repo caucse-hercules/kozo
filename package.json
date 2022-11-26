@@ -14,7 +14,12 @@
   ],
   "main": "./out/extension.js",
   "contributes": {
-    "commands": [],
+    "commands": [
+      {
+        "command": "kozo.createEmptyKozo",
+        "title": "Create empty kozo"
+      }
+    ],
     "viewsContainers": {
       "activitybar": [
         {
@@ -35,7 +40,7 @@
     "viewsWelcome": [
       {
         "view": "kozo",
-        "contents": "Not a Kozo workspace. Create new one.\n[Create Kozo](command:kozo.helloWorld)\nIf Kozo already exists, load that.\n[Load Kozo](command:kozo.helloWorld)\n",
+        "contents": "Not a Kozo workspace. Create new one.\n[Create Kozo](command:kozo.createEmptyKozo)\nIf Kozo already exists, load that.\n[Load Kozo](command:kozo.helloWorld)\n",
         "when": "kozo.isViewWelcomeVisible == true"
       }
     ]
