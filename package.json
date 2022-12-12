@@ -1,70 +1,18 @@
 {
   "name": "kozo",
-  "displayName": "kozo",
-  "description": "",
   "version": "0.0.1",
-  "engines": {
-    "vscode": "^1.73.0"
-  },
-  "categories": [
-    "Other"
-  ],
-  "activationEvents": [
-    "onView:kozo"
-  ],
-  "main": "./out/extension.js",
-  "contributes": {
-    "commands": [
-      {
-        "command": "kozo.createEmptyKozo",
-        "title": "Create empty kozo"
-      }
-    ],
-    "viewsContainers": {
-      "activitybar": [
-        {
-          "id": "kozo",
-          "title": "Kozo",
-          "icon": "./resources/kozo-logo.svg"
-        }
-      ]
-    },
-    "views": {
-      "kozo": [
-        {
-          "id": "kozo",
-          "name": "Kozo"
-        }
-      ]
-    },
-    "viewsWelcome": [
-      {
-        "view": "kozo",
-        "contents": "Not a Kozo workspace. Create new one.\n[Create Kozo](command:kozo.createEmptyKozo)\nIf Kozo already exists, load that.\n[Load Kozo](command:kozo.helloWorld)\n",
-        "when": "kozo.isViewWelcomeVisible == true"
-      }
-    ]
-  },
   "scripts": {
-    "vscode:prepublish": "yarn run esbuild-base --minify",
-    "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node",
-    "build": "yarn run esbuild-base --sourcemap",
-    "watch": "yarn run esbuild-base --sourcemap --watch",
-    "fmt": "prettier --write \"src/**/*.ts\"&& yarn run test -- --fix",
-    "test": "eslint src --ext ts && tsc --noEmit"
+    "build": "yarn nx run core:build",
+    "watch": "yarn nx run core:watch"
   },
+  "private": true,
+  "dependencies": {},
   "devDependencies": {
-    "@types/glob": "^8.0.0",
-    "@types/mocha": "^10.0.0",
-    "@types/node": "16.x",
-    "@types/vscode": "^1.73.0",
-    "@typescript-eslint/eslint-plugin": "^5.38.1",
-    "@typescript-eslint/parser": "^5.38.1",
-    "@vscode/test-electron": "^2.1.5",
-    "esbuild": "^0.15.15",
-    "eslint": "^8.24.0",
-    "glob": "^8.0.3",
-    "mocha": "^10.0.0",
+    "nx": "15.3.0",
+    "prettier": "^2.6.2",
     "typescript": "^4.8.4"
-  }
+  },
+  "workspaces": [
+    "packages/*"
+  ]
 }
