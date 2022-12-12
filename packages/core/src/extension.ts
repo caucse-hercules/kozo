@@ -36,8 +36,57 @@ export function activate(context: vscode.ExtensionContext) {
     })
   );
 
+  disposables.push(
+    vscode.commands.registerCommand("kozo.viewGraph", () => {
+      const panel = vscode.window.createWebviewPanel(
+        "graph view",
+        "Graph View",
+        vscode.ViewColumn.One,
+        { enableScripts: true }
+      );
+      panel.webview.html = getWebviewContent(context, panel.webview);
+      // console.log('Hello world');
+    })
+  );
+
   disposables.forEach((disposable) => context.subscriptions.push(disposable));
 }
 
 // This method is called when your extension is deactivated
 export function deactivate() {}
+
+function getWebviewContent(
+  context: vscode.ExtensionContext,
+  webview: vscode.Webview
+) {
+  const localServerUrl = "http://localhost:5173";
+  const jsFile = "client";
+
+  const clientScriptUrl = `${localServerUrl}/@vite/${jsFile}`;
+  const mainScriptUrl = `${localServerUrl}/src/main.tsx`;
+  const svgUrl = `${localServerUrl}/vite.svg`;
+
+  const html = `<!DOCTYPE html>
+  <html lang="en">
+      <head>
+          <script type="module">
+              import { injectIntoGlobalHook } from "${localServerUrl}/@react-refresh";
+  injectIntoGlobalHook(window);
+  window.$RefreshReg$ = () => {};
+  window.$RefreshSig$ = () => (type) => type;
+          </script>
+          <script type="module" src="${clientScriptUrl}"></script>
+          <meta charset="UTF-8"/>
+          <link rel="icon" type="image/svg+xml" href="${svgUrl}"/>
+          <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+          <title>Vite + React + TS</title>
+         
+      </head>
+      <body>
+          <div id="root" ></div>
+          <script type="module" src="${mainScriptUrl}"></script>
+      </body>
+  </html>
+  `;
+  return html;
+}

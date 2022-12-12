@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "scripts": {
     "build": "yarn nx run core:build",
-    "watch": "yarn nx run core:watch"
+    "watch": "(yarn nx run webview:dev&) && yarn nx run core:watch"
   },
   "private": true,
   "dependencies": {},
